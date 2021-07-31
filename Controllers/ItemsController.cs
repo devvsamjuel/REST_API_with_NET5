@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Catalog.Dtos;
 using Catalog.Entities;
 using Catalog.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +20,13 @@ namespace Catalog.Controllers
 
         //GET /Items
         [HttpGet]
-        public IEnumerable<Item> GetItems()
+        public IEnumerable<ItemDto> GetItems()
         {
-            var items = _repository.GetItems();
+
+            //AsDto() is an extension method for Item class
+            var items = _repository.GetItems()
+            .Select(item => item.AsDto());
+
             return items;
         }
         
@@ -28,7 +34,7 @@ namespace Catalog.Controllers
         // [HttpGet]
         // [Route("id")]
         [HttpGet("{id}")]
-        public ActionResult<Item> GetItem(Guid id)
+        public ActionResult<ItemDto> GetItem(Guid id)
         {
            // var _id = new Guid(id);
 
@@ -39,7 +45,7 @@ namespace Catalog.Controllers
                 return NotFound();    
             }
 
-            return item;
+            return item.AsDto();
         }
 
 
