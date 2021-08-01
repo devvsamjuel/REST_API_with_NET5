@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Catalog.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("items")]
     public class ItemsController : ControllerBase
     {
         private readonly IItemsRepository _repository;
@@ -46,6 +46,44 @@ namespace Catalog.Controllers
             }
 
             return item.AsDto();
+        }
+
+        #region CREATE
+
+
+        //POST /items
+        [HttpPost]
+        public ActionResult<ItemDto> CreateItem([FromBody] CreateItemDto itemDto)
+        {
+            Item newItem = new()
+            {
+                Id = Guid.NewGuid(),
+                Name = itemDto.Name,
+                Price = itemDto.Price,
+                CreatedDate = DateTimeOffset.UtcNow,
+            };
+
+            _repository.CreateItem(newItem);
+
+            return CreatedAtAction(nameof(GetItem), new { Id = newItem.Id }, newItem.AsDto());
+        }
+
+        #endregion
+
+        //PUT /items
+        [HttpPost]
+        public ActionResult<ItemDto> UpdateItem([FromBody] UpdateItemDto itemDto)
+        {
+            Item newItem = new()
+            {
+                Id = itemDto.Id,
+                Name = itemDto.Name,
+                Price = itemDto.Price,
+            };
+
+            _repository.UpdateItem(newItem);
+
+            return CreatedAtAction(nameof(GetItem), new { Id = newItem.Id }, newItem.AsDto());
         }
 
 
