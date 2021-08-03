@@ -48,9 +48,7 @@ namespace Catalog.Controllers
             return item.AsDto();
         }
 
-        #region CREATE
-
-
+        #region CREATE NEW ITEM
         //POST /items
         [HttpPost]
         public ActionResult<ItemDto> CreateItem([FromBody] CreateItemDto itemDto)
@@ -70,23 +68,49 @@ namespace Catalog.Controllers
 
         #endregion
 
-        //PUT /items
-        [HttpPost]
-        public ActionResult<ItemDto> UpdateItem([FromBody] UpdateItemDto itemDto)
+        //PUT /items/{id}
+        [HttpPut("{id}")]
+        public ActionResult<ItemDto> UpdateItem(Guid id, UpdateItemDto itemDto)
         {
-            Item newItem = new()
+            var existingItem = _repository.GetItem(id);
+
+            if (existingItem is null)
             {
-                Id = itemDto.Id,
+                return NotFound();
+            }
+
+            // Item newItem = new()
+            // {
+            //     Name = itemDto.Name,
+            //     Price = itemDto.Price,
+            // };
+
+            Item updatedItem = existingItem with
+            {
                 Name = itemDto.Name,
-                Price = itemDto.Price,
+                Price = itemDto.Price
             };
 
-            _repository.UpdateItem(newItem);
+            _repository.UpdateItem(updatedItem);
 
-            return CreatedAtAction(nameof(GetItem), new { Id = newItem.Id }, newItem.AsDto());
+            return NoContent();
         }
 
 
+        //DELETE /items/{id}
+        [HttpDelete("{id}")]
+        public ActionResult<ItemDto> DeleteItem(Guid id)
+        {
+            var existingItem = _repository.GetItem(id);
+
+            if (existingItem is null)
+            {
+                return NotFound();
+            }
+            _repository.DeleteItem(id);
+
+            return NoContent();
+        }
+
     }
-    
 }

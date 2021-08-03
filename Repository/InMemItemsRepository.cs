@@ -38,6 +38,12 @@ namespace Catalog.Entities
 
             items[index] = item;
         }
+
+        public void DeleteItem(Guid id)
+        {
+            var index = items.FindIndex(existingItem => existingItem.Id == id);
+            items.RemoveAt(index);
+        }
     }
 
 }
