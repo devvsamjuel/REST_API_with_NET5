@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Catalog.Dtos;
 using Catalog.Entities;
 using Catalog.Repositories;
@@ -20,12 +21,12 @@ namespace Catalog.Controllers
 
         //GET /Items
         [HttpGet]
-        public IEnumerable<ItemDto> GetItems()
+        public async Task<IEnumerable<ItemDto>> GetItemsAsync()
         {
 
             //AsDto() is an extension method for Item class
-            var items = _repository.GetItems()
-            .Select(item => item.AsDto());
+            var items = (await _repository.GetItemsAsync())
+                            .Select(item => item.AsDto());
 
             return items;
         }
@@ -34,11 +35,11 @@ namespace Catalog.Controllers
         // [HttpGet]
         // [Route("id")]
         [HttpGet("{id}")]
-        public ActionResult<ItemDto> GetItem(Guid id)
+        public async Task<ActionResult<ItemDto>> GetItemAsync(Guid id)
         {
-           // var _id = new Guid(id);
+            // var _id = new Guid(id);
 
-            var item = _repository.GetItem(id);
+            var item = await _repository.GetItemAsync(id);
 
             if (item == null)
             {
@@ -51,7 +52,7 @@ namespace Catalog.Controllers
         #region CREATE NEW ITEM
         //POST /items
         [HttpPost]
-        public ActionResult<ItemDto> CreateItem([FromBody] CreateItemDto itemDto)
+        public async Task<ActionResult<ItemDto>> CreateItemAsync([FromBody] CreateItemDto itemDto)
         {
             Item newItem = new()
             {
@@ -61,18 +62,18 @@ namespace Catalog.Controllers
                 CreatedDate = DateTimeOffset.UtcNow,
             };
 
-            _repository.CreateItem(newItem);
+            await _repository.CreateItemAsync(newItem);
 
-            return CreatedAtAction(nameof(GetItem), new { Id = newItem.Id }, newItem.AsDto());
+            return CreatedAtAction(nameof(GetItemAsync), new { Id = newItem.Id }, newItem.AsDto());
         }
 
         #endregion
 
         //PUT /items/{id}
         [HttpPut("{id}")]
-        public ActionResult<ItemDto> UpdateItem(Guid id, UpdateItemDto itemDto)
+        public async Task<ActionResult<ItemDto>> UpdateItemAsync(Guid id, UpdateItemDto itemDto)
         {
-            var existingItem = _repository.GetItem(id);
+            var existingItem = await _repository.GetItemAsync(id);
 
             if (existingItem is null)
             {
@@ -91,7 +92,7 @@ namespace Catalog.Controllers
                 Price = itemDto.Price
             };
 
-            _repository.UpdateItem(updatedItem);
+            await _repository.UpdateItemAsync(updatedItem);
 
             return NoContent();
         }
@@ -99,15 +100,15 @@ namespace Catalog.Controllers
 
         //DELETE /items/{id}
         [HttpDelete("{id}")]
-        public ActionResult<ItemDto> DeleteItem(Guid id)
+        public async Task<ActionResult<ItemDto>> DeleteItemAsync(Guid id)
         {
-            var existingItem = _repository.GetItem(id);
+            var existingItem = await _repository.GetItemAsync(id);
 
             if (existingItem is null)
             {
                 return NotFound();
             }
-            _repository.DeleteItem(id);
+            await _repository.DeleteItemAsync(id);
 
             return NoContent();
         }

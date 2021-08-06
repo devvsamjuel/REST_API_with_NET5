@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Catalog.Entities;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -18,41 +19,39 @@ namespace Catalog.Repositories
             IMongoDatabase database = mongoClient.GetDatabase(databaseName);
             itemsCollection = database.GetCollection<Item>(CollectionName);
         }
-        public void CreateItem(Item item)
+        public async Task CreateItemAsync(Item item)
         {
-            itemsCollection.InsertOne(item);
+            await itemsCollection.InsertOneAsync(item);
         }
 
-        public void DeleteItem(Guid id)
+        public async Task DeleteItemAsync(Guid id)
         {
             // itemsCollection.DeleteOne(item => item.Id == id);
 
             var filter = filterDefinitionBuilder.Eq(item => item.Id, id);
-            itemsCollection.DeleteOne(filter);
+            await itemsCollection.DeleteOneAsync(filter);
         }
 
-        public Item GetItem(Guid id)
+        public async Task<Item> GetItemAsync(Guid id)
         {
             // var item = itemsCollection.Find(item => item.Id == id)
             // .FirstOrDefault();
 
             var filter = filterDefinitionBuilder.Eq(item => item.Id, id);
-
-            var item = itemsCollection.Find(filter).SingleOrDefault();
-            return item;
+            return await itemsCollection.Find(filter).SingleOrDefaultAsync();
         }
 
 
-        public void UpdateItem(Item item)
+        public async Task UpdateItemAsync(Item item)
         {
             var filter = filterDefinitionBuilder.Eq(existingItem => existingItem.Id, item.Id);
 
-            itemsCollection.ReplaceOne(filter, item);
+            await itemsCollection.ReplaceOneAsync(filter, item);
         }
 
-        public IEnumerable<Item> GetItems()
+        public async Task<IEnumerable<Item>> GetItemsAsync()
         {
-            return itemsCollection.Find(new BsonDocument()).ToList();
+            return await itemsCollection.Find(new BsonDocument()).ToListAsync();
         }
 
     }
