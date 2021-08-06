@@ -27,3 +27,15 @@ C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\ob
 C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\obj\Debug\net5.0\ref\Catalog.dll
 C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\obj\Debug\net5.0\Catalog.pdb
 C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\obj\Debug\net5.0\Catalog.genruntimeconfig.cache
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\DnsClient.dll
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\MongoDB.Bson.dll
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\MongoDB.Driver.dll
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\MongoDB.Driver.Core.dll
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\MongoDB.Libmongocrypt.dll
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\SharpCompress.dll
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\runtimes\win\native\libzstd.dll
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\runtimes\win\native\snappy32.dll
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\runtimes\win\native\snappy64.dll
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\runtimes\linux\native\libmongocrypt.so
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\runtimes\osx\native\libmongocrypt.dylib
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\runtimes\win\native\mongocrypt.dll
