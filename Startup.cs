@@ -6,6 +6,7 @@ using Catalog.Configs;
 using Catalog.Entities;
 using Catalog.Repositories;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -65,7 +66,8 @@ namespace Catalog
             .AddMongoDb(
                 mongodbConnectionString: mongoDbConfigSettings.ConnectionString,
                 name: "mongodb",
-                timeout: TimeSpan.FromSeconds(3)
+                timeout: TimeSpan.FromSeconds(3),
+                tags: new[] { "ready" }
             );
 
 
@@ -90,7 +92,18 @@ namespace Catalog
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/Health");
+
+                //Health check for ready
+                endpoints.MapHealthChecks("/Health/ready", new HealthCheckOptions
+                {
+                    Predicate = (check) => check.Tags.Contains("ready")
+                });
+
+                //Health check to check if services is running
+                endpoints.MapHealthChecks("/Health/live", new HealthCheckOptions
+                {
+                    Predicate = (_) => false
+                });
             });
         }
     }
