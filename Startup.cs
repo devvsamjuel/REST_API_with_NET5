@@ -40,12 +40,13 @@ namespace Catalog
             BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
             BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
 
+            var mongoDbConfigSettings = Configuration.GetSection(nameof(MongoDbConfig)).Get<MongoDbConfig>();
+
             //Adding DI for MongoDB
             services.AddSingleton<IMongoClient>(serviceProvider =>
             {
-                var settings = Configuration.GetSection(nameof(MongoDbConfig)).Get<MongoDbConfig>();
 
-                return new MongoClient(settings.ConnectionString);
+                return new MongoClient(mongoDbConfigSettings.ConnectionString);
             });
             services.AddSingleton<IItemsRepository, MongoDbItemsRepository>();
 
@@ -59,7 +60,13 @@ namespace Catalog
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog", Version = "v1" });
             });
 
-            services.AddHealthChecks();
+            //Adding Health Checks endpoint for API and Mongo DB Database
+            services.AddHealthChecks()
+            .AddMongoDb(
+                mongodbConnectionString: mongoDbConfigSettings.ConnectionString,
+                name: "mongodb",
+                timeout: TimeSpan.FromSeconds(3)
+            );
 
 
         }

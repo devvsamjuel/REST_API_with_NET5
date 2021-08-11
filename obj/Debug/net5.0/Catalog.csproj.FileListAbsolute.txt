@@ -39,3 +39,6 @@ C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bi
 C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\runtimes\linux\native\libmongocrypt.so
 C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\runtimes\osx\native\libmongocrypt.dylib
 C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\runtimes\win\native\mongocrypt.dll
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\HealthChecks.MongoDb.dll
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\Microsoft.Extensions.Diagnostics.HealthChecks.dll
+C:\Users\P7944\Desktop\LIFT_OFF\SOFTWARE_ENGINEER\TUTORIALS\PRACTICES\Catalog\bin\Debug\net5.0\Microsoft.Extensions.Diagnostics.HealthChecks.Abstractions.dll
