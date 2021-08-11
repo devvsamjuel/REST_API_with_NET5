@@ -51,7 +51,7 @@ namespace Catalog
 
 
             services.AddControllers(
-options => { options.SuppressAsyncSuffixInActionNames = false; }
+                options => { options.SuppressAsyncSuffixInActionNames = false; }
 
             );
             services.AddSwaggerGen(c =>
