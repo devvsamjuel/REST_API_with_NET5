@@ -59,6 +59,8 @@ namespace Catalog
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalog", Version = "v1" });
             });
 
+            services.AddHealthChecks();
+
 
         }
 
@@ -81,6 +83,7 @@ namespace Catalog
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/Health");
             });
         }
     }
